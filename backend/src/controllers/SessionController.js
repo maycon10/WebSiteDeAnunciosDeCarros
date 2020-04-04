@@ -2,6 +2,7 @@ const connection = require('../database/connection');
 
 module.exports = {
 
+    // Método que cria sessão para se autenticar na aplicação
     async create(request, response){
         const { id } = request.body;
 

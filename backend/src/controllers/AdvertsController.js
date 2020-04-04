@@ -3,6 +3,7 @@ const connection = require('../database/connection');
 
 module.exports = {
 
+    // Método que lista os anunsio postados
     async index(request, response){
 
         const {page = 1} = request.query;
@@ -27,6 +28,7 @@ module.exports = {
 
     },
 
+    // Método que criar um novo anucio
     async create(request, response){
         const { caryear, carbrand, carmodel, carcolor, carprice, cardescriptioncondition } = request.body;
         const advertiser_id = request.headers.authorization;
@@ -44,11 +46,12 @@ module.exports = {
         return response.json({ id, advertiser_id });
     },
 
+
+    // Método que deleta anuncio
     async delete(request, response){
         
         const { id } = request.params;
         const advertiser_id = request.headers.authorization;
-
         const adverts = await connection('adverts')
             .where('id', id)
             .select('advertiser_id')
