@@ -10,4 +10,4 @@ module.exports = {
 
             return response.json(adverts);
     }
-}
+};

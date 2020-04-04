@@ -52,10 +52,15 @@ module.exports = {
         
         const { id } = request.params;
         const advertiser_id = request.headers.authorization;
+
         const adverts = await connection('adverts')
             .where('id', id)
             .select('advertiser_id')
             .first();
+
+            if(!adverts){
+                return response.status(400).json({ error: 'Not found adverts with at ID'});
+            }
 
             if(adverts.advertiser_id != advertiser_id) {
                 return response.status(401).json({ error: 'Operation not permitted. '});

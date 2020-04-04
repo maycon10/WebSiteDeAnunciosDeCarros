@@ -15,7 +15,7 @@ routes.post('/advertiser', AdvertiserController.create);
 routes.get('/interested', IterestedController.index);
 routes.post('/interested', IterestedController.create);
 
-routes.get('/profile', ProfileController);
+routes.get('/profile', ProfileController.index);
 
 routes.get('/adverts', AdvertsController.index);
 routes.post('/adverts', AdvertsController.create);
