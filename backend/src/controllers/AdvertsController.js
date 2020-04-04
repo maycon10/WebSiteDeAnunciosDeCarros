@@ -44,7 +44,21 @@ module.exports = {
         return response.json({ id, advertiser_id });
     },
 
-    async delete(){
+    async delete(request, response){
         
+        const { id } = request.params;
+        const advertiser_id = request.headers.authorization;
+
+        const adverts = await connection('adverts')
+            .where('id', id)
+            .select('advertiser_id')
+            .first();
+
+            if(adverts.advertiser_id != advertiser_id) {
+                return response.status(401).json({ error: 'Operation not permitted. '});
+            }
+
+            await connection('adverts').where('id',id).delete();
+            return response.status(204).send();
     }
 };

@@ -16,5 +16,6 @@ routes.post('/interested', IterestedController.create);
 
 routes.get('/adverts', AdvertsController.index);
 routes.post('/adverts', AdvertsController.create);
+routes.delete('/adverts/:id', AdvertsController.delete);
 
 module.exports = routes;
