@@ -10,7 +10,7 @@ Funcionalides:
 - Criação de cadastro de anunciante;
 - Criação de cadastro de interessado em ver os anuncios;
 - Anunciante tem a opção de postar novos anuncios;
-===========================================================================================================================================
+
 Tecnologias utilizadas: 
 - Javascript
 - Node
@@ -20,7 +20,6 @@ Tecnologias utilizadas:
 - Knex
 - SQLite3
 - Nodemon
-===========================================================================================================================================
 
 
 
