@@ -8,6 +8,6 @@ module.exports = {
             .where('advertiser_id', advertiser_id)
             .select('*');
 
-            return response.json(adverts);
+        return response.json(adverts);
     }
 };

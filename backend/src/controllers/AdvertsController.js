@@ -5,11 +5,9 @@ module.exports = {
 
     // Método que lista os anunsio postados
     async index(request, response){
-
+        
         const {page = 1} = request.query;
-
         const [count] = await connection('adverts').count();
-
         console.log(count);
 
         const adverts = await connection('adverts')
@@ -25,11 +23,11 @@ module.exports = {
 
         response.header('X-Total-Count', count['count(*)']);
         return response.json(adverts);
-
     },
 
     // Método que criar um novo anucio
     async create(request, response){
+        
         const { caryear, carbrand, carmodel, carcolor, carprice, cardescriptioncondition } = request.body;
         const advertiser_id = request.headers.authorization;
 
@@ -59,7 +57,7 @@ module.exports = {
             .first();
 
             if(!adverts){
-                return response.status(400).json({ error: 'Not found adverts with at ID'});
+                return response.status(404).json({ error: 'Not found adverts with at ID'});
             }
 
             if(adverts.advertiser_id != advertiser_id) {

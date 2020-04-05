@@ -4,30 +4,40 @@ module.exports = {
 
     // Método que cria sessão para se autenticar na aplicação
     async create(request, response){
-        const { id } = request.body;
-
-        const advertiser = await connection('advertiser')
-            .whereNotNull('id', id)
-            .select('name')
+        
+        const { username, password } = request.body;
+        
+        const advertiser_user = await connection('advertiser')
+            .where('username', username)
+            .select('username')
             .first();
 
-        if(!advertiser){
+        const advertiser_pwd = await connection('advertiser')
+            .where('password', password)
+            .select('password')
+            .first();
 
-            const interested = await connection('interested')
-                .whereNotNull('id', id)
-                .select('name')
+        if(!advertiser_user || !advertiser_pwd){
+
+            const interested_user = await connection('interested')
+                    .where('username', username)
+                    .select('username')
+                    .first();
+
+            const interested_pwd = await connection('interested')
+                .where('password', password)
+                .select('password')
                 .first();
             
-            if(!interested){
-                
-                return response.status(400).json({error: 'No advertiser found with this ID'})
-            }
+            if(!interested_user || !interested_pwd){
 
-            return response.json(interested);
-            
+                return response.status(404).json({error :'Date incorrects, try again.'});
+            }   
+
+            return response.status(200).json(interested_user);  
         }
-
-        return response.json(advertiser);
-
-    }
-}
+        
+        return response.status(200).json(advertiser_user);  
+    }   
+        
+};

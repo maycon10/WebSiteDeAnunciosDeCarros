@@ -13,10 +13,10 @@ module.exports = {
 
     // Método que cadastra novo Anunciante
     async create(request, response){
+        
         const {name, surname, username, password, confirmpassword, birthday, email, whatsapp} = request.body;
-    
-    const id = crypto.randomBytes(4).toString('HEX');
-    const typeprofile = 'Advertiser';
+        const id = crypto.randomBytes(4).toString('HEX');
+        const typeprofile = 'Advertiser';
 
     await connection('advertiser').insert({
         id,
@@ -32,8 +32,6 @@ module.exports = {
     })
 
     return response.json({ id, username, typeprofile });
-
-
 
     }
 };
